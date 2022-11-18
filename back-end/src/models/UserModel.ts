@@ -20,6 +20,24 @@ class UserModel implements IUserModel {
     }
   }
 
+  readOneWithAccount = async (username: string): Promise<Users | undefined> => {
+    try {
+      const user = await Users.findOne(
+        { 
+          where: { username },
+          attributes: {exclude: ['password', 'accountId']},
+          include: {
+            model: Accounts
+          }
+        }
+      )
+
+      return user as Users;
+    } catch (error) {
+      ValidationError.InternalServerError();
+    }
+  }
+
   create = async (payload: IUser): Promise<Users> => {
     let user;
     let account;
