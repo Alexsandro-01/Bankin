@@ -1,4 +1,4 @@
-import { Model, INTEGER, DECIMAL, STRING, DATE, literal } from 'sequelize'
+import { Model, INTEGER, DECIMAL, DATE, literal } from 'sequelize';
 import Accounts from './Accounts';
 import db from '.';
 

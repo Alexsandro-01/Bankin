@@ -1,15 +1,15 @@
-import express from 'express'
-import 'express-async-errors'
-import errorMidlleware from './middlewares/ErrorMiddleware'
+import express from 'express';
+import 'express-async-errors';
+import errorMidlleware from './middlewares/ErrorMiddleware';
 
-import userRoute from './routes/user.routes'
+import userRoute from './routes/user.routes';
 
-const api = express()
+const api = express();
 
-api.use(express.json())
+api.use(express.json());
 
 api.use('/users', userRoute);
 
-api.use(errorMidlleware)
+api.use(errorMidlleware);
 
-export default api
+export default api;
