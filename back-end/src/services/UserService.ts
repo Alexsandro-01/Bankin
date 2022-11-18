@@ -1,9 +1,9 @@
 import IUserService from "../interfaces/IUserService";
 import IUserModel from "../interfaces/IUserModel";
 import Users from "../database/models/User";
-import { IUser, usernameSchema, passwordSchema } from "../interfaces/IUser";
+import { IUser, IUserName, usernameSchema, passwordSchema } from "../interfaces/IUser";
 import ValidationError from "../errors/ValidationErros";
-import {checkPassword, hashPassword, makeToken } from './validations/login'
+import {checkPassword, hashPassword, makeToken, verifyToken } from './validations/login'
 
 class UserService implements IUserService {
   private _model;
@@ -77,6 +77,15 @@ class UserService implements IUserService {
     )
 
     return { token };
+  }
+
+  readOneWithAccount = async (token: string | undefined): Promise<Users | undefined> => {
+
+    const userData = await verifyToken(token);
+
+    const userWithAccount = await this._model.readOneWithAccount(userData?.username as string);
+
+    return userWithAccount;
   }
 }
 
