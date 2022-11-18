@@ -1,5 +1,5 @@
 import { Model, INTEGER, DECIMAL, STRING, DATE, literal } from 'sequelize'
-import Accounts from './AccountsModel';
+import Accounts from './Accounts';
 import db from '.';
 
 class Transactions extends Model {
