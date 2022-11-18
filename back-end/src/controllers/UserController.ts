@@ -12,7 +12,15 @@ class UserController {
 
     const response = await this._service.create(payload)
 
-    res.status(200).json(response)
+    res.status(201).json(response)
+  }
+
+  login = async (req: Request, res: Response): Promise<void> => {
+    const payload = req.body;
+
+    const response = await this._service.login(payload);
+
+    res.status(200).json(response);
   }
 }
 

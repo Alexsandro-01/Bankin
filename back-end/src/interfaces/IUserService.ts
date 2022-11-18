@@ -3,7 +3,7 @@ import {IUser, IUserName} from '../interfaces/IUser'
 
 interface IUserService {
   create(payload: IUser): Promise<UserModel>
-  // readOne(payload: IUserName): Promise<UserModel>
+  login(payload: IUser): Promise<{ token: string }>
 }
 
 export default IUserService;

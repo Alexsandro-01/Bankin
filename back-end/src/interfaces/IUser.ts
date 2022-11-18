@@ -22,6 +22,9 @@ export type IUserName = z.infer<typeof usernameSchema>
 
 export type IUser = IUserName & z.infer<typeof passwordSchema>
 
-
+export interface tokenData {
+  username: string,
+  accountId: number
+}
 
 
