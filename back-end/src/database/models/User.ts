@@ -1,5 +1,5 @@
 import { Model, INTEGER, STRING } from 'sequelize'
-import Accounts from './AccountsModel';
+import Accounts from './Accounts';
 import db from '.';
 
 class Users extends Model {
@@ -21,7 +21,7 @@ Users.init({
     allowNull: false,
   },
   password: {
-    type: STRING(30),
+    type: STRING(100),
     allowNull: false
   },
   accountId: {

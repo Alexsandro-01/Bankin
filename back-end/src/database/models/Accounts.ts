@@ -16,6 +16,7 @@ Accounts.init({
   },
   balance: {
     type: DECIMAL(9, 2),
+    defaultValue: 100.00,
     allowNull: false
   }
 }, {
