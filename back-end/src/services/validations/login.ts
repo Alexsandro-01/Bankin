@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 import fs from 'fs/promises';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import { tokenData } from '../../interfaces/IUser';
 import ValidationErrors from '../../errors/ValidationErros'
 
@@ -26,4 +26,16 @@ export async function makeToken(payload: tokenData): Promise<string> {
   const token = jwt.sign(payload, secret, { expiresIn: '1d' });
   
   return token;
+}
+
+export async function verifyToken(token: string | undefined): Promise<tokenData | void> {
+  const secret = await fs.readFile(key, 'utf-8');
+  
+  try {
+    const data = jwt.verify(token as string, secret);
+    
+    return data as tokenData;
+  } catch (err) {
+    ValidationErrors.Unauthorized('Expired or invalid token');
+  }
 }
