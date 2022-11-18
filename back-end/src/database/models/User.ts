@@ -6,7 +6,7 @@ class Users extends Model {
   id!: number;
   username!: string;
   password!: string;
-  accountId!: string;
+  accountId!: number;
 }
 
 Users.init({
