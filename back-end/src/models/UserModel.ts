@@ -11,7 +11,6 @@ class UserModel implements IUserModel {
       const user = await Users.findOne(
         { 
           where: { username },
-          attributes: { exclude: ['password'] }
         }
       )
 
@@ -48,7 +47,9 @@ class UserModel implements IUserModel {
     }
 
     user = await this.readOne(user?.username)
-    return user as Users;
+
+    const {password, ...spred} = user as Users;
+    return spred as Users;
   }
 }
 
