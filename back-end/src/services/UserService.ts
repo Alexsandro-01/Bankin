@@ -3,7 +3,7 @@ import IUserModel from "../interfaces/IUserModel";
 import Users from "../database/models/User";
 import { IUser, usernameSchema, passwordSchema } from "../interfaces/IUser";
 import ValidationError from "../errors/ValidationErros";
-import bcrypt from 'bcrypt';
+import {checkPassword, hashPassword, makeToken } from './validations/login'
 
 class UserService implements IUserService {
   private _model;
@@ -11,7 +11,7 @@ class UserService implements IUserService {
     this._model = model;
   }
 
-  validateCreatePayload = (payload: IUser) => {
+  validateUserPayload = (payload: IUser) => {
     const parsedUserName = usernameSchema.safeParse(payload)
     const parsedPassword = passwordSchema.safeParse(payload)
   
@@ -43,7 +43,7 @@ class UserService implements IUserService {
   }
 
   create = async (payload: IUser): Promise<Users> => {
-    const dataUser = this.validateCreatePayload(payload)
+    const dataUser = this.validateUserPayload(payload)
 
     const userExist = await this._model.readOne(dataUser.username);
 
@@ -51,13 +51,32 @@ class UserService implements IUserService {
       ValidationError.ConflictError(`Username "${dataUser.username}" already exists`)
     }
 
-    const hashPassword = await bcrypt.hash(dataUser.password, 8);
-
-    dataUser.password = hashPassword
+    dataUser.password = await hashPassword(dataUser.password);
 
     const user = await this._model.create(dataUser)
     
     return user;
+  }
+
+  login = async (payload: IUser): Promise<{ token: string}> => {
+    const dataUser = this.validateUserPayload(payload)
+
+    const user = await this._model.readOne(dataUser.username);
+    
+    if (!user) {
+      ValidationError.Unauthorized('Invalid username or password')
+    }
+    
+    await checkPassword(dataUser.password, user?.password as string);
+
+    const token = await makeToken(
+      {
+        username: user?.username as string,
+        accountId: user?.accountId as number
+      }
+    )
+
+    return { token };
   }
 }
 
