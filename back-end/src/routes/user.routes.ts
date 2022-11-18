@@ -11,5 +11,6 @@ const userRoute = Router()
 
 userRoute.post('/create', controller.create);
 userRoute.post('/login', controller.login);
+userRoute.get('/get-user', controller.readOneWithAccount);
 
 export default userRoute;

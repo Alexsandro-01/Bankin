@@ -22,6 +22,16 @@ class UserController {
 
     res.status(200).json(response);
   }
+
+  readOneWithAccount = async (req: Request, res: Response): Promise<void> => {
+    const bearerToken = req.headers.authorization;
+
+    const token = bearerToken?.replace('Bearer ', '');
+    
+    const response = await this._service.readOneWithAccount(token);
+
+    res.status(200).json(response);
+  }
 }
 
 export default UserController
