@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcrypt';
 import fs from 'fs/promises';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 import { tokenData } from '../../interfaces/IUser';
-import ValidationErrors from '../../errors/ValidationErros'
+import ValidationErrors from '../../errors/ValidationErros';
 
 const key = 'jwt.key';
 
@@ -10,7 +10,7 @@ export async function checkPassword(plaintextPassword: string, hashPassword: str
   const isValid = await bcrypt.compare(plaintextPassword, hashPassword);
 
   if (!isValid) {
-    ValidationErrors.Unauthorized('Invalid username or password')
+    ValidationErrors.Unauthorized('Invalid username or password');
   }
 }
 

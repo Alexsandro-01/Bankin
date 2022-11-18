@@ -1,5 +1,5 @@
 import { DECIMAL } from 'sequelize';
-import { Model, INTEGER, STRING } from 'sequelize'
+import { Model, INTEGER } from 'sequelize';
 import db from '.';
 
 class Accounts extends Model {

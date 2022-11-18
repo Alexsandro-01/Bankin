@@ -1,24 +1,30 @@
-import IUserModel from "../interfaces/IUserModel";
-import Users from "../database/models/User";
-import Accounts from "../database/models/Accounts";
-import { IUser } from "../interfaces/IUser";
-import ValidationError from "../errors/ValidationErros";
+import IUserModel from '../interfaces/IUserModel';
+import Users from '../database/models/User';
+import Accounts from '../database/models/Accounts';
+import { IUser } from '../interfaces/IUser';
+import ValidationError from '../errors/ValidationErros';
+import IAccountModel from '../interfaces/IAccountModel';
 
 class UserModel implements IUserModel {
+  private _accountModel;
+  constructor(accountModel: IAccountModel) {
+    this._accountModel = accountModel;
+  }
 
   readOne = async (username: string | undefined): Promise<Users | undefined | void> => {
     try {
       const user = await Users.findOne(
         { 
+          raw: true,
           where: { username },
         }
-      )
+      );
 
       return user as Users;
     } catch (error) {
-      ValidationError.InternalServerError()
+      ValidationError.InternalServerError();
     }
-  }
+  };
 
   readOneWithAccount = async (username: string): Promise<Users | undefined> => {
     try {
@@ -30,45 +36,49 @@ class UserModel implements IUserModel {
             model: Accounts
           }
         }
-      )
+      );
 
       return user as Users;
     } catch (error) {
       ValidationError.InternalServerError();
     }
-  }
+  };
+
+  createAccount = async (userId: number) => {
+    const account = await this._accountModel.create();
+
+    if (account) {
+      await Users.update(
+        { accountId: account.id },
+        { where: { id: userId } 
+      });
+
+    } else {
+      await Users.destroy({where: { id: userId } });
+
+      ValidationError.InternalServerError();
+    }
+  };
 
   create = async (payload: IUser): Promise<Users> => {
     let user;
-    let account;
 
     try {
       user = await Users.create(payload);
       
       if (user) {
-        account = await Accounts.create({});
-
-        if (account) {
-          await Users.update(
-            { accountId: account.id },
-            { where: { id: user.id } 
-          });
-
-        } else {
-          await Users.destroy({where: { id: user.id } })
-
-          ValidationError.InternalServerError();
-        }
+        await this.createAccount(user.id);        
       }
+
     } catch (error) {
       ValidationError.InternalServerError();
     }
 
-    user = await this.readOne(user?.username)
+    const updatedUser = await this.readOne(user?.username);
 
-    const {password, ...spred} = user as Users;
+    const {password, ...spred} = updatedUser as Users;
     return spred as Users;
-  }
+  };
 }
 
 export default UserModel;
