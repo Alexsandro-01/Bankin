@@ -28,7 +28,7 @@ export async function makeToken(payload: tokenData): Promise<string> {
   return token;
 }
 
-export async function verifyToken(token: string | undefined): Promise<tokenData | void> {
+export async function verifyToken(token: string | undefined): Promise<tokenData | undefined> {
   const secret = await fs.readFile(key, 'utf-8');
   
   try {
