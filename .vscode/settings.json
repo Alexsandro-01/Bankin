@@ -4,14 +4,11 @@
       "previewLimit": 50,
       "server": "localhost",
       "port": 5432,
+      "askForPassword": true,
       "driver": "PostgreSQL",
-      "name": "Bankin",
+      "name": "askcn",
       "database": "bankin",
-      "username": "postgres",
-      "password": "root"
+      "username": "postgres"
     }
-  ],
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  }
+  ]
 }
