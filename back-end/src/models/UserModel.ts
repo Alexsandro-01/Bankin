@@ -1,7 +1,7 @@
 import IUserModel from '../interfaces/IUserModel';
 import Users from '../database/models/User';
 import Accounts from '../database/models/Accounts';
-import { IUser } from '../interfaces/IUser';
+import { IUser, userWithAccount } from '../interfaces/IUser';
 import ValidationError from '../errors/ValidationErros';
 import IAccountModel from '../interfaces/IAccountModel';
 
@@ -26,19 +26,22 @@ class UserModel implements IUserModel {
     }
   };
 
-  readOneWithAccount = async (username: string): Promise<Users | undefined> => {
+  readOneWithAccount = async (
+    username: string
+    ): Promise<userWithAccount| undefined> => {
     try {
       const user = await Users.findOne(
         { 
           where: { username },
-          attributes: {exclude: ['password', 'accountId']},
+          attributes: { exclude: ['password'] },
           include: {
-            model: Accounts
+            model: Accounts,
+            attributes: { exclude: ['id']}
           }
         }
       );
 
-      return user as Users;
+      return user as userWithAccount;
     } catch (error) {
       ValidationError.InternalServerError();
     }

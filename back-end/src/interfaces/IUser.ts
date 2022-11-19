@@ -1,4 +1,7 @@
+/* eslint-disable camelcase */
 import z from 'zod';
+import Accounts from '../database/models/Accounts';
+import Users from '../database/models/User';
 
 export const usernameSchema = z.object({
   username: z
@@ -27,4 +30,4 @@ export interface tokenData {
   accountId: number
 }
 
-
+export type userWithAccount = Users & { Account: Accounts }
