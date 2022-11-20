@@ -24,4 +24,20 @@ export interface ITransaction {
   newCashInUserBalance: number
 }
 
+export interface IFilterTransactionByType {
+  debitedAccountId?: number,
+  creditedAccountId?: number,
+}
+
+export const querySchema = z.object({
+  filter: z.enum(['all', 'cash-in', 'cash-out']),
+  date: z.string().min(10, {
+    message: 'date must be format yyyy-mm-dd'
+  }).max(10, {
+    message: 'date must be format yyyy-mm-dd'
+  }).optional(),
+});
+
+export type IQueryParam = z.infer<typeof querySchema>
+
 export type ITransactionPayload = z.infer<typeof transactionSchema>

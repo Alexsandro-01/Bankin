@@ -1,6 +1,11 @@
 import Transactions from '../database/models/Transactions';
 import ValidationError from '../errors/ValidationErros';
-import { ITransactionPayload, transactionSchema } from '../interfaces/ITransaction';
+import {
+  IQueryParam,
+  ITransactionPayload,
+  querySchema,
+  transactionSchema
+} from '../interfaces/ITransaction';
 import ITransactionModel from '../interfaces/ITransactionModel';
 import ITransactionService from '../interfaces/ITransactionService';
 import { userWithAccount } from '../interfaces/IUser';
@@ -91,14 +96,72 @@ class TransactionService implements ITransactionService {
 
     return response;
   };
+
+  filterTransactions = async (query: IQueryParam, userId: number) => {
+    const date = query.date ? query.date : '';
+
+    if (query.filter === 'all') {
+      const transactions = await this._model.readAllTransactions(userId, date);
+
+      return transactions;
+    }
+
+    if (query.filter === 'cash-in') {
+      const transaction = await this._model.readByTypeTransactions(
+        { creditedAccountId: userId }, date
+      );
+
+      return transaction;
+    }
+
+    if (query.filter === 'cash-out') {
+      const transaction = await this._model.readByTypeTransactions(
+        { debitedAccountId: userId }, date
+      );
+
+      return transaction;
+    }
+
+  };
+
+  validateQuery = (query: IQueryParam) => {
+
+    if (query.date !== undefined && isNaN(Date.parse(query.date))) {
+      ValidationError.BadRequest(`${query.date} must be a valid Date and format "yyyy-mm-dd"`);
+    }
+
+    const parsedQuery = querySchema.safeParse(query);
+
+    if (!parsedQuery.success) {
+      throw parsedQuery.error;
+    }
+
+    return parsedQuery;
+  };
+
+  readTransactions = async (query: unknown, token: string) => {
+    const dataUser  = await verifyToken(token);
+
+    const parsedQuery = this.validateQuery(query as IQueryParam);
+
+    const user = await this._userModel.readOne(dataUser?.username);
+
+    if (!user) ValidationError.Unauthorized('Invalid username or password');
+
+    const transactions = await this.filterTransactions(parsedQuery.data, user?.id as number);
+
+    return transactions;
+  };
 }
 
 export default TransactionService;
 
-// export interface ITransaction {
-//   debitedAccountId: number,
-//   creditedAccountId: number,
-//   valueTransaction: number,
-//   newCashOutUserbalance: number,
-//   newCashInUserBalance: number
-// }
+/**
+ * querys busca transações
+ *
+ * all -> retorna todas
+ * { debitedAccountId: userId } cash-out
+ * { creditedAccountId: userId } cash-in
+ * { "createdAt": "2022-11-20T10:46:15.019Z" } por data
+ *
+ */

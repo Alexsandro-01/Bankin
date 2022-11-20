@@ -15,6 +15,16 @@ class TransactionController {
     const response = await this._service.cashOut(payload, token as string);
     res.status(200).json(response);
   };
+
+  readTransactions = async (req: Request, res: Response): Promise<void> => {
+    const bearerToken = req.headers.authorization;
+    const token = bearerToken?.replace('Bearer ', '');
+    const query = req.query;
+
+    const response = await this._service.readTransactions(query, token as string);
+
+    res.status(200).json(response);
+  };
 }
 
 export default TransactionController;
