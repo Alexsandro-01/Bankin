@@ -21,7 +21,7 @@ class TransactionController {
     const token = bearerToken?.replace('Bearer ', '');
     const query = req.query;
 
-    const response = await this._service.readTransactions(query.filter as string, token as string);
+    const response = await this._service.readTransactions(query, token as string);
 
     res.status(200).json(response);
   };
