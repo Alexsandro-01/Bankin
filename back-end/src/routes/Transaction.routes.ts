@@ -15,5 +15,6 @@ const controller = new TransactionController(service);
 const transactionRoute = Router();
 
 transactionRoute.post('/cash-out', controller.cashOut);
+transactionRoute.get('/', controller.readTransactions);
 
 export default transactionRoute;
