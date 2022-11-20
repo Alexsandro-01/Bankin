@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: app_frontend
+    build: ./front-end
+    ports:
+      - 3000:3000
+    working_dir: /app-frontend
+    volumes:
+      - ./front-end:/app-frontend
+    depends_on:
+      - backend
+    
+  backend:
+    container_name: app_backend
+    build: ./back-end
+    ports:
+      - 3001:3001
+    working_dir: /app-backend
+    restart: on-failure
+    tty: true
+    volumes:
+      - ./back-end:/app-backend
+    depends_on:
+      - db
+    environment:
+      - DB_USER=postgres
+      - DB_PASS=root
+      - DB_NAME=bankin
+      - DB_HOST=db
+      - DB_PORT=5432
+  
+  db:
+    image: postgres
+    container_name: postgresdb
+    restart: on-failure
+    environment:
+      - POSTGRES_PASSWORD=root
+    ports:
+      - 5432:5432
+
+networks:
+  default:
+    name: bankin_net
