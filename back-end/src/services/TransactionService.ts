@@ -91,14 +91,30 @@ class TransactionService implements ITransactionService {
 
     return response;
   };
+
+  readTransactions = async (query: string, token: string) => {
+    const dataUser  = await verifyToken(token);
+
+    const user = await this._userModel.readOne(dataUser?.username);
+
+    if (!user) ValidationError.Unauthorized('Invalid username or password');
+
+    if (query === 'all' || query === '') {
+      const transactions = await this._model.readAllTransactions(user?.id as number);
+
+      return transactions;
+    }
+  };
 }
 
 export default TransactionService;
 
-// export interface ITransaction {
-//   debitedAccountId: number,
-//   creditedAccountId: number,
-//   valueTransaction: number,
-//   newCashOutUserbalance: number,
-//   newCashInUserBalance: number
-// }
+/**
+ * querys busca transações
+ * 
+ * all -> retorna todas
+ * { debitedAccountId: userId } cash-out
+ * { creditedAccountId: userId } cash-in
+ * { "createdAt": "2022-11-20T10:46:15.019Z" } por data
+ * 
+ */
