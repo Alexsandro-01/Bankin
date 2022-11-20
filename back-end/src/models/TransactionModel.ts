@@ -3,6 +3,7 @@ import { ITransaction } from '../interfaces/ITransaction';
 import IAccountModel from '../interfaces/IAccountModel';
 import ValidationError from '../errors/ValidationErros';
 import ITransactionModel from '../interfaces/ITransactionModel';
+import { Op } from 'sequelize';
 
 class TransactionModel implements ITransactionModel{
   private _accountModel;
@@ -51,6 +52,24 @@ class TransactionModel implements ITransactionModel{
     } catch (error) {
       ValidationError.InternalServerError();
     }
+  };
+
+  readAllTransactions = async (userId: number) => {
+    try {
+      const transactions = await Transactions.findAll({
+        where: {
+          [Op.or]: [
+            { debitedAccountId: userId },
+            { creditedAccountId: userId }
+          ]
+        }
+      });
+
+      return transactions;
+    } catch (error) {
+      ValidationError.InternalServerError();
+    }
+
   };
 }
 
