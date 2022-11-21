@@ -1,0 +1,9 @@
+.notfound-page {
+  align-items: center;
+  justify-content: center;
+}
+
+.notfound-page h1 {
+  text-shadow: red -2px 0,
+               cyan 2px 0;
+}

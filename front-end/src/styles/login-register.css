@@ -1,0 +1,29 @@
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #080c25;
+  color: #ff4c29;
+  height: 35vh;
+}
+
+.forms-container {
+  padding: 12px 24px;
+}
+
+.forms-container h1 {
+  text-align: center;
+  color: #080c25;
+  padding: 16px 0;
+}
+
+.forms-container button {
+  background-color: #ff4c29;
+  color: #ddd;
+}
+
+.forms-container .redirect-link-element {
+  text-align: right;
+  padding: 8px 0;
+}
+
