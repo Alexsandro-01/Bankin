@@ -30,7 +30,9 @@ export interface IFilterTransactionByType {
 }
 
 export const querySchema = z.object({
-  filter: z.enum(['all', 'cash-in', 'cash-out']),
+  filter: z.enum(['all', 'cash-in', 'cash-out'], {
+    required_error: 'Filter is required',
+  }),
   date: z.string().min(10, {
     message: 'date must be format yyyy-mm-dd'
   }).max(10, {
