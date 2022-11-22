@@ -3,7 +3,7 @@ import { ITransactionprops } from '../interfaces/ITransactions';
 import { cashOut } from '../services/fetch';
 import { getUserOnStorage } from '../services/sessionStorage';
 
-function Transaction(props: ITransactionprops) {
+function Transactions(props: ITransactionprops) {
   const [transferData, setTransferdata] = useState({
     cashInUsername: '',
     value: ''
@@ -101,4 +101,4 @@ function Transaction(props: ITransactionprops) {
   );
 }
 
-export default Transaction;
+export default Transactions;

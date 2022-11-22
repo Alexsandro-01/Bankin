@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Transaction from "../components/Transactions";
+import Transactions from "../components/Transactions";
 import { getUserOnStorage } from '../services/sessionStorage';
 import { getBalance } from '../services/fetch';
 import { IUser } from '../interfaces/IUsers';
@@ -73,7 +73,7 @@ function Home() {
 
           {
             toggle && (
-              <Transaction getBalance={ getUserBalance } />
+              <Transactions getBalance={ getUserBalance } />
             )
           }
         </section>
