@@ -1,0 +1,148 @@
+.home header {
+  height: 15vh;
+  background-color: var(--secondary);
+  color: var(--prymary)
+}
+
+.home header > div {
+  max-width: 720px;
+  height: 100%;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.home button {
+  background-color: var(--prymary);
+}
+
+.home button:disabled {
+  background-color: #969696;
+}
+
+.home header p {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.home header .logout-btn {
+  background-color: transparent;
+  color: var(--prymary);
+  padding: 0;
+  font-size: large;
+}
+
+.home .actual-balance {
+  padding: 24px;
+}
+
+.home .actual-balance p {
+  padding: 4px 0;
+}
+
+.home .actual-balance .balance-value {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.home .transactions {
+  padding: 24px;
+}
+
+.home .transactions .toggle {
+  background-color: var(--quartiary);
+  color: var(--prymary);
+  border-radius: 0;
+}
+
+.home .transactions .toggle-on {
+  border-top: 1px solid var(--secondary);
+}
+
+.home .transactions .toggle-off {
+  border-bottom: 1px solid var(--secondary);
+}
+
+.home .historic {
+  padding: 24px;
+}
+
+.home .historic h3 {
+  padding: 24px 0;
+  color: var(--prymary);
+}
+
+.home .historic .input-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.home .historic .input-container .date {
+  width: 40%;
+}
+
+.home .historic .input-container .date input {
+  width: 100%;
+  padding: 4px 8px;
+  margin: 8px 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-bottom: 2px solid;
+}
+
+.home .historic .input-container .radio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.home .historic .input-container .radio div {
+  display: flex;
+  align-items: flex-end;
+  padding-left: 8px;
+}
+
+.home .historic .filter-container-btn {
+  display: flex;
+  align-items: center;
+}
+
+.home .historic .input-container .radio input {
+  margin-right: 4px;
+}
+
+.home .historic .input-container .radio-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.render-transaction-container {
+  margin-top: 20px;
+  border-bottom: 1px solid #cdcdcd;
+  padding: 8px 0;
+}
+
+.render-transaction-container div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.render-transaction-container .balance-value {
+  padding: 8px 0;
+}
+
+.empity {
+  padding: 16px 8px;
+  text-align: center;
+  color: #969696;
+}
+
+@media (min-width: 720px) {
+  .home .home-container {
+    width: 720px;
+    margin: 0 auto;
+  }
+}
