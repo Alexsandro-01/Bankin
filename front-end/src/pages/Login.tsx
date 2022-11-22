@@ -24,7 +24,7 @@ function Login() {
   const navigate = useNavigate();
 
   function checkPassword() {
-    const { password } = loginData
+    const { password } = loginData;
     const regex = /[0-9]/;
 
     const noLower = password !== password.toLowerCase();
@@ -36,25 +36,25 @@ function Login() {
         ...notification,
         errorPassword: 'Senha precisa ter uma letra maiúscula',
         validPassword: false,
-      })
+      });
     } else if (!lenght) {
       setNotification({
         ...notification,
         errorPassword: 'Senha precisa ter pelo menos 8 caracteres',
         validPassword: false,
-      })
+      });
     } else if (!hasNumber) {
       setNotification({
         ...notification,
         errorPassword: 'Senha precisa ter pelo menos um número',
         validPassword: false,
-      })
+      });
     } else {
       setNotification({
         ...notification,
         errorPassword: '',
         validPassword: true,
-      })
+      });
     }
   }
 
@@ -67,13 +67,13 @@ function Login() {
         ...notification,
         errorName: 'Nome de usuário precisa ter pelo menos 3 caracteres',
         validUser: false
-      })
+      });
     } else {
       setNotification({
         ...notification,
         errorName: '',
         validUser: true
-      })
+      });
     }
   }
 
@@ -106,13 +106,14 @@ function Login() {
 
   }
 
-  const { username, password } = loginData
+  const { username, password } = loginData;
 
   return (
     <main className='login-register-container'>
       <section className='title-container'>
         <h1>Olá de novo!</h1>
       </section>
+
       <section className='forms-container'>
         <h1>Login</h1>
         <form>
@@ -120,36 +121,38 @@ function Login() {
             <label htmlFor='userName'>Nome de usuário</label>
             <input
               type='text'
-              value={username}
+              value={ username }
               placeholder='Usuário'
               id='userName'
-              onBlur={() => validate()}
-              onChange={({ target }) => setLoginData({ ...loginData, username: target.value })}
+              onBlur={ () => validate() }
+              onChange={ ({ target }) => setLoginData({ ...loginData, username: target.value }) }
             />
           </div>
+
           {
             notification.errorName.length > 0 && (
               <p className='warn'>
-                {notification.errorName}
+                { notification.errorName }
               </p>
             )
           }
+
           <div className='input-elem'>
             <label htmlFor='password'>Senha</label>
             <input
               type='text'
-              value={password}
+              value={ password }
               placeholder='Senha'
               id='password'
-              onBlur={() => checkPassword()}
-              onChange={({ target }) => setLoginData({ ...loginData, password: target.value })}
+              onBlur={ () => checkPassword() }
+              onChange={ ({ target }) => setLoginData({ ...loginData, password: target.value }) }
             />
           </div>
 
           {
             notification.errorPassword.length > 0 && (
               <p className='warn'>
-                {notification.errorPassword}
+                { notification.errorPassword }
               </p>
             )
           }
@@ -163,13 +166,19 @@ function Login() {
           <div className='btn-element'>
             <button
               type='submit'
-              onClick={(event) => {
-                stopEvent(event)
+              onClick={ (event) => {
+                stopEvent(event);
               }}
             >
               Entrar
             </button>
           </div>
+
+          {
+            loginInfo.message.length > 0 && (
+              <p className='alert'>{ loginInfo.message }</p>
+            )
+          }
 
         </form>
       </section>

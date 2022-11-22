@@ -2,24 +2,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #080c25;
-  color: #ff4c29;
+  background-color: var(--secondary);
+  color: var(--prymary);
   height: 35vh;
 }
 
 .forms-container {
   padding: 12px 24px;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .forms-container h1 {
   text-align: center;
-  color: #080c25;
+  color: var(--prymary);
   padding: 16px 0;
 }
 
 .forms-container button {
-  background-color: #ff4c29;
-  color: #ddd;
+  background-color: var(--prymary);
+  color: var(--quartiary);
 }
 
 .forms-container .redirect-link-element {
@@ -27,3 +29,18 @@
   padding: 8px 0;
 }
 
+@media (min-width: 920px) {
+  .login-register-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .title-container {
+    width: 50%;
+    height: 100vh;
+  }
+
+  .forms-container {
+    margin: auto;
+  }
+}

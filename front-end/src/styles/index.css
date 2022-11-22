@@ -1,3 +1,12 @@
+:root {
+  --prymary: #ff4c29;
+  --secondary: #080c25;
+  --tertiary: steelblue;
+  --quartiary: #f7f7f7;
+  --warn: #da0037;
+  --success: #00da49
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -23,12 +32,47 @@ main {
   flex-direction: column;
   width: 100vw;
   min-height: 100vh;
-  background-color: #ebebeb;
+  background-color: var(--quartiary);
 }
 
 .warn {
   font-size: small;
   color: #da0037;
+}
+
+.alert {
+  font-size: small;
+  border: solid 1px #ff4c29;
+  color: var(--tertiary);
+  border-radius: 4px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.failure {
+  font-size: small;
+  font-weight: bold;
+  border: solid 1px var(--warn);
+  background-color: #e874957a;
+  color: var(--tertiary);
+  border-radius: 4px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+.success {
+  font-size: small;
+  font-weight: bold;
+  border: solid 1px var(--success);
+  background-color: #62eb977a;
+  color: var(--tertiary);
+  border-radius: 4px;
+  padding: 8px 0;
+  text-align: center;
+}
+
+label {
+  font-size: small;
 }
 
 .input-elem {
@@ -70,8 +114,21 @@ button {
   width: 100%;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: darkgray;
 }
 
 a {
-  color: steelblue;
+  color: var(--tertiary);
+}
+
+.transfer-up {
+  color: var(--success);
+}
+
+.transfer-down {
+  color: var(--warn);
 }
