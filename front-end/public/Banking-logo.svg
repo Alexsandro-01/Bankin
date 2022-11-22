@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="210" height="210" viewBox="0 0 210 210">
+  <defs>
+    <style>
+      .cls-1 {
+        font-size: 45.833px;
+        fill: #ff4c29;
+        text-anchor: middle;
+        font-family: Arial;
+        font-weight: 700;
+      }
+    </style>
+  </defs>
+  <text id="B" class="cls-1" transform="translate(102.111 188.238) scale(5.042)"><tspan x="0">B</tspan></text>
+</svg>
