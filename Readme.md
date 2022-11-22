@@ -30,7 +30,7 @@ Back-end:
 
 O projeto está configurado com docker-compose, para iniciar o projeto basta executar o comando abaixo no terminal da raíz do projeto.
 
-**Note**: As portas `3000`, `3001` e `5432` precisam estar livres para a plicação funcionar corretamente.
+>**Note**: As portas `3000`, `3001` e `5432` precisam estar livres para a plicação funcionar corretamente.
 
 ```bash
   docker-compose up
