@@ -1,7 +1,7 @@
 # Boas Vindas
 
-# Contexto
-Aplicação web fullstack, simulando uma carteira digital, que possibilita usuários se cadastrem na aplicação, realizarem login e  conseguirem realizar transferências entre si.
+## Contexto
+Aplicação web fullstack, simulando uma carteira digital, que possibilita usuários se cadastrarem na aplicação, realizarem login e  conseguirem realizar transferências entre si.
 
 ## Tecnologias usadas
 
@@ -30,7 +30,7 @@ Back-end:
 
 O projeto está configurado com docker-compose, para iniciar o projeto basta executar o comando abaixo no terminal da raíz do projeto.
 
-**Note:** As portas `3000`, `3001` e `5432` precisam estar livres para a plicação funcionar corretamente.
+**Note**: As portas `3000`, `3001` e `5432` precisam estar livres para a plicação funcionar corretamente.
 
 ```bash
   docker-compose up

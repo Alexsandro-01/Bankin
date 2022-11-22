@@ -62,7 +62,6 @@ function Login() {
     const { username } = loginData
 
     if (username.length < 3) {
-      console.log(username.length);
       setNotification({
         ...notification,
         errorName: 'Nome de usuário precisa ter pelo menos 3 caracteres',
