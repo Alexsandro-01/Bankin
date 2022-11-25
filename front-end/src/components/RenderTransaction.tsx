@@ -3,9 +3,8 @@ import { FaArrowDown, FaArrowUp } from 'react-icons/fa';
 
 function RenderTransaction({ transaction, userAccount }: IPropRenderTransacrtion) {
 
-  const date = new Date(transaction.createdAt).toLocaleDateString().split('/');
-  const formatedDate = `${date[1]}/${date[0]}/${date[2]}`;
-
+  const date = new Date(transaction.createdAt).toLocaleDateString()
+  
   return (
     <div key={ transaction.id } className='render-transaction-container'>
       <div>
@@ -19,7 +18,7 @@ function RenderTransaction({ transaction, userAccount }: IPropRenderTransacrtion
               }
             </strong>
           </p>
-          <p><small>{ formatedDate }</small></p>
+          <p><small>{ date }</small></p>
       </div>
       <p className="balance-value" >R$ { transaction.value.replace('.', ',') }</p>
     </div>

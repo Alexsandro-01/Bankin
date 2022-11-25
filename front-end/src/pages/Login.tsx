@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../services/fetch';
 import { setUserOnStorage } from '../services/sessionStorage';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../styles/login-register.css';
 
 function Login() {
@@ -9,6 +10,8 @@ function Login() {
     username: '',
     password: '',
   });
+
+  const [viewPassword, setViewpassword] = useState(false);
 
   const [notification, setNotification] = useState({
     errorName: '',
@@ -136,16 +139,29 @@ function Login() {
             )
           }
 
-          <div className='input-elem'>
+          <div className='input-elem div-password'>
             <label htmlFor='password'>Senha</label>
             <input
-              type='text'
+              type={ viewPassword ? 'text' : 'password' }
               value={ password }
               placeholder='Senha'
               id='password'
               onBlur={ () => checkPassword() }
               onChange={ ({ target }) => setLoginData({ ...loginData, password: target.value }) }
-            />
+            /> 
+            {
+              viewPassword ? (
+                <FaEye
+                  className='password-eye'
+                  onClick={() => setViewpassword(!viewPassword)}
+                />
+              ) : (
+                <FaEyeSlash
+                  className='password-eye'
+                  onClick={() => setViewpassword(!viewPassword)}
+                />
+              )
+            }
           </div>
 
           {
