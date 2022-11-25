@@ -1,4 +1,6 @@
-# Boas Vindas
+# Boas Vindas ao repositório do Bankin
+
+
 
 ## Contexto
 Aplicação web fullstack, simulando uma carteira digital, que possibilita usuários se cadastrarem na aplicação, realizarem login e  conseguirem realizar transferências entre si.
@@ -23,11 +25,16 @@ Back-end:
 * `Sequelize-ORM`
 * `PostgresSQL`
 * `Jsonwebtoken`
+* `Docker`
 
 #
 
 ## Iniciando o projeto
 
+> **Warning**: Na raíz do diretório de backend, há um arquivo chamado `jwt.key.example`. Antes de iniciar o projeto, troque o nome do arquivo para `jwt.key`. Esse arquivo é utilizado pelo jsonwebtoken para acriação de token para os usuários, o conteúdo pode 
+ser trocado para uma chave de sua preferência.
+
+<br />
 O projeto está configurado com docker-compose, para iniciar o projeto basta executar o comando abaixo no terminal da raíz do projeto.
 
 **Note**: As portas `3000`, `3001` e `5432` precisam estar livres para a plicação funcionar corretamente.
@@ -47,7 +54,7 @@ Para derrubar os serviços use
 ## Acessando os serviços
 
 Front-end: `localhost:3000/` <br />
-Back-end: `localhost:3001/`
+Back-end: `localhost:3001/` <br />
 
 ## Documentação da API
 
