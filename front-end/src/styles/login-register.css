@@ -29,6 +29,18 @@
   padding: 8px 0;
 }
 
+.div-password {
+  position: relative;
+}
+
+.password-eye {
+  position: absolute;
+  right: 10px;
+  bottom: 35px;
+  color: var(--prymary);
+  font-size: large;
+}
+
 @media (min-width: 920px) {
   .login-register-container {
     display: flex;
