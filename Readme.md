@@ -35,7 +35,7 @@ Back-end:
 
 ## Iniciando o projeto
 
-> **Warning**: Na raíz do diretório de backend, há um arquivo chamado `jwt.key.example`. Antes de iniciar o projeto, troque o nome do arquivo para `jwt.key`. Esse arquivo é utilizado pelo jsonwebtoken para acriação de token para os usuários, o conteúdo pode 
+> **Warning**: Na raíz do diretório de backend, há um arquivo chamado `jwt.key.example`. Antes de iniciar o projeto, troque o nome do arquivo para `jwt.key`. Esse arquivo é utilizado pelo jsonwebtoken para a criação de token para os usuários, o conteúdo pode 
 ser trocado para uma chave de sua preferência.
 
 <br />
